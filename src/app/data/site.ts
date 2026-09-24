@@ -6,7 +6,7 @@ export const site = {
    * e.g. 'https://hazem-elazb.vercel.app' or 'https://hazemzz.github.io/portfolio'.
    * Used for the canonical link and absolute Open Graph URLs. Leave empty until you know it.
    */
-  url: 'https://hazem-portfolio.vercel.app',
+  url: 'https://hazem-portfolio-kappa.vercel.app',
   title: 'Hazem Eid Abd El-Raouf El-Azb | Backend .NET Developer',
   description:
     'Backend .NET developer with 6+ years of experience building enterprise software, backend services, APIs, ' +
