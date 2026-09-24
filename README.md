@@ -4,7 +4,7 @@ Personal portfolio of **Hazem Eid Abd El-Raouf El-Azb**, Backend .NET Developer.
 
 ## Run locally
 
-Requires Node.js 20.19+, 22.12+, or 24+.
+Requires Node.js 24.
 
 ```bash
 npm install
