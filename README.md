@@ -74,8 +74,9 @@ absolute Open Graph URLs, which LinkedIn and other link previews need.
 
 1. Push the project to a GitHub repository (branch `main`).
 2. In the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Every push to `main` runs `.github/workflows/deploy-pages.yml`, which builds with a relative base href
-   (`npm run build:gh-pages`) and publishes the site. It works at `https://<user>.github.io/<repo>/` and on a custom domain.
+3. Run `.github/workflows/deploy-pages.yml` from the **Actions** tab (it is manual-only because the site is on Vercel;
+   add a `push` trigger to deploy on every push). It builds with a relative base href (`npm run build:gh-pages`),
+   so the site works at `https://<user>.github.io/<repo>/` and on a custom domain.
 
 ## Project structure
 
