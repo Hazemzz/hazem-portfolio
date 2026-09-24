@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Title, description, Open Graph and JSON-LD are set from src/app/data/site.ts (see SeoService). -->
+    <title>Hazem Eid Abd El-Raouf El-Azb | Backend .NET Developer</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0c10" />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    />
+
+    <script>
+      // Runs before first paint: apply the saved theme (dark by default) and enable scroll reveals.
+      (function () {
+        var root = document.documentElement;
+        try {
+          if (localStorage.getItem('theme') === 'light') root.setAttribute('data-theme', 'light');
+        } catch (e) {}
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add('reveal-ready');
+          // Safety net: never leave content hidden if the app fails to start.
+          setTimeout(function () {
+            if (!root.classList.contains('app-ready')) root.classList.remove('reveal-ready');
+          }, 4000);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

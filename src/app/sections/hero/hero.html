@@ -1,0 +1,90 @@
+<section id="top" class="hero" tabindex="-1" aria-labelledby="hero-title">
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <div class="container grid">
+    <div class="intro">
+      <p class="status">
+        <span class="pulse" aria-hidden="true"></span>
+        <span>
+          {{ profile.currentPosition.role }} at <strong>{{ profile.currentPosition.company }}</strong>
+          <span class="sep" aria-hidden="true">·</span> {{ profile.currentPosition.location }}
+        </span>
+      </p>
+
+      <h1 id="hero-title">{{ profile.name }}</h1>
+
+      <p class="role">
+        {{ profile.role }} <span class="slash" aria-hidden="true">/</span>
+        <span class="visually-hidden">,</span>
+        <span class="role-detail">{{ profile.roleDetail }}</span>
+      </p>
+
+      <p class="summary">{{ profile.heroSummary }}</p>
+
+      <ul class="tag-list skills" role="list" aria-label="Key technologies">
+        @for (skill of skills; track skill) {
+          <li class="tag">{{ skill }}</li>
+        }
+      </ul>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="#experience" (click)="nav.scrollTo('experience', $event)">
+          View Experience
+          <app-icon class="icon-shift" name="arrow-right" [size]="16" />
+        </a>
+        <a class="btn btn-secondary" href="#contact" (click)="nav.scrollTo('contact', $event)">Contact Me</a>
+        <a class="btn btn-ghost" [href]="profile.cv.href" [attr.download]="profile.cv.downloadName">
+          <app-icon class="icon-drop" name="download" [size]="16" />
+          Download CV
+        </a>
+      </div>
+
+      <ul class="links" role="list" aria-label="Contact links">
+        <li>
+          <a [href]="'mailto:' + profile.email">
+            <app-icon name="mail" [size]="16" />
+            <span>{{ profile.email }}</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="profile.linkedin.url" target="_blank" rel="noopener noreferrer">
+            <app-icon name="linkedin" [size]="16" />
+            <span>LinkedIn</span>
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </li>
+        <li>
+          <a [href]="profile.github.url" target="_blank" rel="noopener noreferrer">
+            <app-icon name="github" [size]="16" />
+            <span>GitHub</span>
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </li>
+        <li class="location">
+          <app-icon name="map-pin" [size]="16" />
+          <span>{{ profile.location }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <figure class="system card" aria-labelledby="system-caption">
+      <figcaption id="system-caption" class="system-head">
+        <span class="system-title">Where I work in the stack</span>
+        <span class="system-note">C# / .NET backend</span>
+      </figcaption>
+
+      <ol class="layers" role="list">
+        @for (layer of layers; track layer.id) {
+          <li class="layer" [class.muted]="layer.muted" [attr.data-layer]="layer.id">
+            <span class="layer-label">{{ layer.label }}</span>
+            <ul class="chips" role="list">
+              @for (item of layer.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </li>
+        }
+      </ol>
+    </figure>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+<section id="about" class="section" tabindex="-1" aria-labelledby="about-title">
+  <div class="container">
+    <div class="top">
+      <div appReveal>
+        <app-section-heading
+          index="01"
+          eyebrow="About"
+          title="Backend engineering for real business systems"
+          headingId="about-title"
+        />
+        <div class="bio">
+          @for (paragraph of profile.about; track $index) {
+            <p>{{ paragraph }}</p>
+          }
+        </div>
+      </div>
+
+      <aside class="facts card" appReveal aria-label="Quick facts">
+        <dl>
+          <div>
+            <dt>Current role</dt>
+            <dd>
+              {{ profile.currentPosition.role }}, {{ profile.currentPosition.company }}
+              <span class="sub">{{ profile.currentPosition.location }}</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Experience</dt>
+            <dd>{{ profile.yearsOfExperience }} years with C#/.NET</dd>
+          </div>
+          <div>
+            <dt>Domains</dt>
+            <dd>{{ profile.domains.join(' · ') }}</dd>
+          </div>
+          <div>
+            <dt>Based in</dt>
+            <dd>{{ profile.location }}</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>
+              @for (language of profile.languages; track language.name; let last = $last) {
+                {{ language.name }} <span class="sub-inline">({{ language.level }})</span>{{ last ? '' : ', ' }}
+              }
+            </dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+
+    <h3 class="focus-title">What I work on</h3>
+    <ul class="focus" role="list">
+      @for (area of focusAreas; track area.title; let i = $index) {
+        <li class="focus-item" appReveal>
+          <span class="focus-index mono">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <h4>{{ area.title }}</h4>
+          <p>{{ area.text }}</p>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

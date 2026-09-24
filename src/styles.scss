@@ -1,0 +1,376 @@
+/* ==========================================================================
+   Design tokens
+   Dark is the default theme; `data-theme="light"` on <html> switches it.
+   ========================================================================== */
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0a0c10;
+  --bg-elevated: #0e1117;
+  --surface: #11151c;
+  --surface-2: #161b24;
+  --surface-hover: #1a202b;
+  --border: #1f2531;
+  --border-strong: #2c3342;
+
+  --text: #e8ebf1;
+  --text-muted: #a3acba;
+  --text-subtle: #7a8496;
+
+  --accent: #a193ff;
+  --accent-strong: #c0b6ff;
+  --accent-contrast: #0a0c10;
+  --accent-soft: rgb(161 147 255 / 0.1);
+  --accent-border: rgb(161 147 255 / 0.32);
+  --glow: rgb(112 88 255 / 0.2);
+  --success: #4ade80;
+
+  --grid-line: rgb(255 255 255 / 0.035);
+  --header-bg: rgb(10 12 16 / 0.72);
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 18px 40px -24px rgb(0 0 0 / 0.7);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f6f7f9;
+  --bg-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f1f3f7;
+  --surface-hover: #eceff5;
+  --border: #e1e5ec;
+  --border-strong: #cdd3de;
+
+  --text: #0e1117;
+  --text-muted: #465062;
+  --text-subtle: #5d6779;
+
+  --accent: #5a3ed6;
+  --accent-strong: #4a2ec4;
+  --accent-contrast: #ffffff;
+  --accent-soft: rgb(90 62 214 / 0.07);
+  --accent-border: rgb(90 62 214 / 0.28);
+  --glow: rgb(90 62 214 / 0.1);
+  --success: #15803d;
+
+  --grid-line: rgb(14 17 23 / 0.045);
+  --header-bg: rgb(246 247 249 / 0.78);
+  --shadow-card: 0 1px 2px rgb(14 17 23 / 0.04), 0 16px 32px -24px rgb(14 17 23 / 0.18);
+}
+
+:root {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --text-h1: clamp(2.6rem, 1.5rem + 4.4vw, 4.75rem);
+  --text-h2: clamp(1.85rem, 1.35rem + 1.7vw, 2.6rem);
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+
+  --container: 1160px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 64px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.menu-open body {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Sections receive programmatic focus after in-page navigation; no ring needed there. */
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+/* ==========================================================================
+   Layout helpers
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(4.5rem, 9vw, 7.5rem);
+  border-top: 1px solid var(--border);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform 0.2s var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ==========================================================================
+   Shared components: buttons, tags, cards
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  padding: 0.65rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s var(--ease);
+
+  .icon {
+    transition: transform 0.2s var(--ease);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+
+  &:hover {
+    background: var(--accent-strong);
+  }
+
+  &:hover .icon-shift {
+    transform: translateX(3px);
+  }
+}
+
+.btn-secondary {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+  color: var(--text);
+
+  &:hover {
+    background: var(--surface-hover);
+    border-color: var(--text-subtle);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+
+  &:hover {
+    color: var(--text);
+    border-color: var(--border-strong);
+    background: var(--surface);
+  }
+
+  &:hover .icon-drop {
+    transform: translateY(2px);
+  }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.tag-accent {
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--accent-strong);
+    text-decoration-color: currentColor;
+  }
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   Scroll reveal (see RevealDirective and the inline script in index.html)
+   ========================================================================== */
+
+.reveal-ready .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.reveal-ready .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-ready .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

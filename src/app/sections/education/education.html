@@ -1,0 +1,64 @@
+<section id="education" class="section" tabindex="-1" aria-labelledby="education-title">
+  <div class="container">
+    <div appReveal>
+      <app-section-heading
+        index="05"
+        eyebrow="Education"
+        title="Education & certifications"
+        headingId="education-title"
+      />
+    </div>
+
+    <div class="grid">
+      @for (entry of education; track entry.degree) {
+        <article class="item card" appReveal>
+          <span class="item-icon"><app-icon name="graduation" [size]="20" /></span>
+          <p class="kind">Education</p>
+          <h3>{{ entry.degree }}</h3>
+          <p class="org">{{ entry.institution }}</p>
+          <ul class="meta" role="list">
+            <li class="mono">{{ entry.period }}</li>
+            <li>{{ entry.location }}</li>
+            @if (entry.grade) {
+              <li>Grade: {{ entry.grade }}</li>
+            }
+          </ul>
+        </article>
+      }
+
+      @for (cert of certifications; track cert.name) {
+        <article class="item card" appReveal>
+          <span class="item-icon"><app-icon name="award" [size]="20" /></span>
+          <p class="kind">Certification</p>
+          <h3>{{ cert.name }}</h3>
+          <p class="org">{{ cert.issuer }}@if (cert.location) {, {{ cert.location }}}</p>
+          <ul class="topics" role="list">
+            @for (topic of cert.topics; track topic) {
+              <li>{{ topic }}</li>
+            }
+          </ul>
+          <ul class="meta" role="list">
+            <li class="mono">{{ cert.year }}</li>
+            @if (cert.note) {
+              <li>{{ cert.note }}</li>
+            }
+          </ul>
+        </article>
+      }
+
+      <article class="item card" appReveal>
+        <span class="item-icon"><app-icon name="globe" [size]="20" /></span>
+        <p class="kind">Languages</p>
+        <h3>Spoken languages</h3>
+        <dl class="languages">
+          @for (language of languages; track language.name) {
+            <div>
+              <dt>{{ language.name }}</dt>
+              <dd>{{ language.level }}</dd>
+            </div>
+          }
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>

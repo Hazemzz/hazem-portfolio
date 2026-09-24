@@ -1,0 +1,79 @@
+<div class="bar container">
+  <a class="brand" href="#top" (click)="go('top', $event)" [attr.aria-label]="profile.shortName + ', back to top'">
+    <span class="monogram" aria-hidden="true">{{ profile.initials }}</span>
+    <span class="brand-text">
+      <span class="brand-name">{{ profile.shortName }}</span>
+      <span class="brand-role">{{ profile.cvTitle }}</span>
+    </span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="Primary">
+    <ul role="list">
+      @for (item of items; track item.id) {
+        <li>
+          <a
+            [href]="'#' + item.id"
+            [class.active]="nav.activeId() === item.id"
+            [attr.aria-current]="nav.activeId() === item.id ? 'true' : null"
+            (click)="go(item.id, $event)"
+            >{{ item.label }}</a
+          >
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="icon-btn"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+    >
+      <app-icon [name]="theme.theme() === 'dark' ? 'sun' : 'moon'" />
+    </button>
+
+    <a class="btn btn-secondary cv-btn" [href]="profile.cv.href" [attr.download]="profile.cv.downloadName">
+      <app-icon name="download" [size]="16" />
+      <span>CV</span>
+    </a>
+
+    <button
+      #menuButton
+      type="button"
+      class="icon-btn menu-btn"
+      aria-controls="mobile-nav"
+      [attr.aria-expanded]="menuOpen()"
+      [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
+      (click)="toggleMenu()"
+    >
+      <app-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="20" />
+    </button>
+  </div>
+</div>
+
+<div
+  #mobilePanel
+  id="mobile-nav"
+  class="mobile-panel"
+  [class.open]="menuOpen()"
+  [attr.inert]="menuOpen() ? null : ''"
+>
+  <nav class="container" aria-label="Mobile">
+    <ul role="list">
+      @for (item of items; track item.id; let i = $index) {
+        <li>
+          <a [href]="'#' + item.id" [class.active]="nav.activeId() === item.id" (click)="go(item.id, $event)">
+            <span class="mono index">0{{ i + 1 }}</span>
+            {{ item.label }}
+          </a>
+        </li>
+      }
+    </ul>
+    <a class="btn btn-primary mobile-cv" [href]="profile.cv.href" [attr.download]="profile.cv.downloadName">
+      <app-icon name="download" [size]="16" />
+      Download CV
+    </a>
+  </nav>
+</div>
+<div class="scrim" [class.open]="menuOpen()" (click)="closeMenu()" aria-hidden="true"></div>

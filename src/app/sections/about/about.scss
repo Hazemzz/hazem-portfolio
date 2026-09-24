@@ -1,0 +1,149 @@
+.top {
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.bio {
+  max-width: 40rem;
+  margin-top: -1rem;
+
+  p {
+    margin: 0 0 1.1rem;
+    color: var(--text-muted);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  p:first-child {
+    color: var(--text);
+  }
+}
+
+/* Quick facts ------------------------------------------------------------ */
+
+.facts {
+  padding: 0.5rem 1.4rem;
+
+  dl {
+    margin: 0;
+  }
+
+  div {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .sub {
+    display: block;
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.875rem;
+  }
+
+  .sub-inline {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+}
+
+/* Focus areas ------------------------------------------------------------ */
+
+.focus-title {
+  margin: clamp(3.5rem, 7vw, 5rem) 0 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.focus {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--border);
+  overflow: hidden;
+}
+
+.focus-item {
+  padding: 1.5rem 1.4rem 1.6rem;
+  background: var(--surface);
+  transition: background-color 0.25s ease;
+
+  &:hover {
+    background: var(--surface-2);
+  }
+
+  &:hover .focus-index {
+    color: var(--accent);
+  }
+
+  h4 {
+    margin: 0.9rem 0 0.45rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+}
+
+.focus-index {
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  transition: color 0.25s ease;
+}
+
+@media (min-width: 640px) {
+  .focus {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .focus {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .top {
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: 4rem;
+  }
+
+  .facts {
+    margin-top: 2.4rem;
+  }
+}

@@ -1,0 +1,34 @@
+<section id="stack" class="section" tabindex="-1" aria-labelledby="stack-title">
+  <div class="container">
+    <div class="head" appReveal>
+      <app-section-heading
+        index="02"
+        eyebrow="Tech stack"
+        title="C#/.NET first, with the data and integration layers around it"
+        headingId="stack-title"
+      />
+      <p class="legend"><span class="swatch" aria-hidden="true"></span> Highlighted: core .NET backend stack</p>
+    </div>
+
+    <div class="groups">
+      @for (group of groups; track group.id) {
+        <article class="group card" [class.secondary]="group.secondary" [attr.data-group]="group.id" appReveal>
+          <header>
+            <h3>{{ group.title }}</h3>
+            <p>{{ group.description }}</p>
+          </header>
+          <ul class="tag-list" role="list">
+            @for (item of group.items; track item.name) {
+              <li class="tag" [class.tag-accent]="item.featured">
+                {{ item.name }}
+                @if (item.featured) {
+                  <span class="visually-hidden">(core)</span>
+                }
+              </li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </div>
+</section>
